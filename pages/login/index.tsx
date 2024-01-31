@@ -1,43 +1,54 @@
-import axios from "axios";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-const Index = () => {
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../utils/firebase";
 
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  
-    const changeMail = (e) => {
-      setEmail(e.target.value);
-    }
-  
-    const changePass = (e) => {
-      setPassword(e.target.value);
-    }
-    
-    const http = axios.create({
-      baseURL: 'http://localhost:8000',
-      withCredentials: true,
-    });
+const Signup = () => {
+  const router = useRouter();
+  const auth = getAuth(app);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const log = async ()  => {
-      await http.get('/sanctum/csrf-cookie').then((res) => {
-        http.post('/api/login', {email, password}).then((res) => {
-          console.log(res);
-        })
-      })
-    }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const id = await signInWithEmailAndPassword(auth, email, password);
+    localStorage.setItem("key", id.user.uid);
+    await router.push("/");
+  };
 
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
+  };
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
+  };
 
   return (
     <div>
-      
-      Email<input type="text" onChange={changeMail} value={email}/>
-      <br />
-      Pass<input type="text" onChange={changePass} value={password}/>
+      <form onSubmit={handleSubmit}>
+        <div className="">
+          email{" "}
+          <input
+            type="email"
+            className="border border-slate-500"
+            onChange={handleChangeEmail}
+          />
+        </div>
+        <div className="">
+          password{" "}
+          <input
+            type="text"
+            className="border border-slate-500"
+            onChange={handleChangePassword}
+          />
+        </div>
 
-      <button onClick={log}>login</button>
+        <button type="submit">登録</button>
+      </form>
     </div>
   );
-}
+};
 
-export default Index;
+export default Signup;

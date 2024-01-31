@@ -1,0 +1,46 @@
+{
+  "user": [
+    {
+      "email": "hatiman@test.com",
+      "password": "hatiman80000",
+      "name": "hatiman",
+      "search_flag": false,
+      "search_id": "hatiman80000",
+      "topImage_url": "2023-12-12_11:16:56_hatiman.jpg",
+      "backgroundImage_url": "2023-12-12_11:16:56_bangkoksp.jpg",
+      "id": 2
+    },
+    {
+      "email": "test@test.com",
+      "password": "Motoki0305",
+      "name": "Motoki",
+      "search_flag": true,
+      "search_id": "Motoki03050",
+      "topImage_url": "",
+      "backgroundImage_url": "",
+      "id": 1
+    },
+    {
+      "email": "test@test.com",
+      "password": "testuser",
+      "name": "testuser01",
+      "search_flag": true,
+      "search_id": "testuser",
+      "topImage_url": "",
+      "backgroundImage_url": "",
+      "id": 3
+    }
+  ],
+  "friends": [
+    {
+      "email": "test@test.com",
+      "password": "Motoki0305",
+      "name": "Motoki",
+      "search_flag": true,
+      "search_id": "Motoki03050",
+      "topImage_url": "",
+      "backgroundImage_url": "",
+      "id": 1
+    }
+  ]
+}
